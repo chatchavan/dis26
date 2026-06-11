@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Swiss Contributions at DIS 2026</title>
+<style>
+:root {
+  --swiss-red: #dc0018;
+  --swiss-red-dark: #8b0012;
+  --swiss-red-light: rgba(220, 0, 24, 0.08);
+  --accent: #2c3e50;
+  --accent-light: #3498db;
+  --text-primary: #2c3e50;
+  --text-secondary: #5a6c7d;
+  --text-muted: #95a5a6;
+  --bg-primary: #f8f9fa;
+  --bg-card: #ffffff;
+  --bg-hover: #fafbfc;
+  --border-color: #e9ecef;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+#app { min-height: 100vh; }
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+.container { max-width: 1400px; margin: 0 auto; padding: 20px; flex: 1; }
+.section {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 25px;
+  margin-bottom: 30px;
+}
+.section h2 {
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+  font-weight: 600;
+}
+.papers-count { margin-bottom: 15px; color: var(--text-secondary); }
+.footer { text-align: center; padding: 30px; color: var(--text-secondary); font-size: 0.9em; }
+.footer a { color: var(--accent-light); }
+.header {
+  background: #ffffff;
+  color: var(--text-primary);
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border-color);
+}
+.header h1 { font-size: 2.2em; margin-bottom: 8px; font-weight: 600; }
+.header p { font-size: 1.1em; color: var(--text-secondary); margin-bottom: 15px; }
+.header-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.95em;
+  color: var(--text-secondary);
+}
+.header-links a { color: var(--accent-light); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.header-links a:hover { color: var(--accent); text-decoration: underline; }
+.header-links .separator { color: var(--text-muted); }
+.header-links .linkedin-link { display: inline-flex; align-items: center; gap: 4px; }
+.header-links .linkedin-link svg { flex-shrink: 0; }
+@media (max-width: 768px) {
+  .header h1 { font-size: 1.8em; }
+}
+.active-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 15px; }
+.active-filters-label { font-size: 0.9em; color: #666; }
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 0.85em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.filter-chip:hover { background: #e0e0e0; transform: scale(1.02); }
+.filter-chip-type { background: #e8f4f8; border-color: #b8d4e3; }
+.filter-chip-type:hover { background: #d0e8f0; }
+.filter-chip-institute { background: #f0f4f8; border-color: #c5d3e0; }
+.filter-chip-institute:hover { background: #e0e8f0; }
+.filter-chip-award { background: #fff8e1; border-color: #ffd700; }
+.filter-chip-award:hover { background: #ffecb3; }
+.filter-chip-remove { font-size: 1.2em; font-weight: bold; line-height: 1; color: #666; }
+.filter-chip:hover .filter-chip-remove { color: #333; }
+.clear-all-filters {
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid #999;
+  border-radius: 20px;
+  font-size: 0.85em;
+  color: #666;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.clear-all-filters:hover { background: #333; border-color: #333; color: white; }
+.paper-list { display: flex; flex-direction: column; gap: 15px; }
+.paper-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  background: #ffffff;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.paper-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.paper-card h3 { margin-bottom: 10px; color: #222; font-size: 1.1em; }
+.paper-card h3 a { color: var(--text-primary); text-decoration: none; }
+.paper-card h3 a:hover { color: var(--accent-light); text-decoration: underline; }
+.paper-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.85em; font-weight: 500; }
+.tag-type { background: #e0e0e0; color: #333; }
+.tag-institute { background: #e8e8e8; color: #444; }
+.tag-award { font-weight: 600; }
+.tag-award-best { background: #ffd700; color: #5d4800; }
+.tag-award-best.tag-clickable:hover { background: #e6c200; }
+.tag-award-honorable { background: #e8d5b7; color: #6b5a3e; }
+.tag-award-honorable.tag-clickable:hover { background: #d9c4a3; }
+.tag-clickable { cursor: pointer; border: none; transition: background 0.2s, transform 0.1s; }
+.tag-clickable:hover { background: #d0d0d0; transform: scale(1.05); }
+.tag-type.tag-clickable:hover { background: var(--accent); color: white; }
+.paper-authors { font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.5; }
+.swiss-author-link {
+  background: #fff3cd;
+  padding: 2px 4px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  color: #856404;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.swiss-author-link:hover { background: #ffc107; color: #533f03; }
+.expand-toggle {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  background: transparent;
+  border: 1px dashed #ccc;
+  border-radius: var(--radius-sm);
+  color: #666;
+  font-size: 0.85em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.expand-toggle:hover { background: #f5f5f5; border-color: #999; color: #333; }
+.paper-expandable { margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; }
+.paper-expandable p { font-size: 0.9em; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+.error-container { display: flex; align-items: center; justify-content: center; min-height: 60vh; padding: 20px; }
+.error-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.error-card h2 { color: var(--swiss-red); margin-bottom: 15px; }
+.error-message { color: var(--text-primary); font-size: 1.1em; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+var CONFERENCE = {"pageTitle":"Swiss Contributions at DIS 2026","headerTitle":"🇨🇭 Swiss Contributions at DIS 2026","headerSubtitle":"Singapore, 13 – 17 June 2026","location":"Singapore","swisschiUrl":"https://swisschi.acm.org/","linkedinUrl":"https://www.linkedin.com/company/swisschi/","footerCredit":"Data from DIS 2026 Program • Site preparation by Chat Wacharamanotham •","footerAuthorName":"April Wang","footerAuthorUrl":"https://peachlab.inf.ethz.ch/","sheetCsvUrl":""};
+var PAPERS = [{"ID":"257015","Link":"https://programs.sigchi.org/dis/2026/program/content/257015","Title":"RoboticTerritories: Supporting Varying Levels of Automation Through AR for Large-Scale Human–Robot Assembly","Type":"Paper","Awards":"","Author's Message":"","Swiss Institutes":"ETH Zurich","Swiss Authors Count":"3","Swiss Authors":"Joseph Kenny (ETH Zurich, Zurich); Samuelle Bourgault (ETH Zurich, Zurich); Daniela Mitterberger (ETH Zurich, Zurich)","All Authors":"Joseph Kenny (Princeton University); Samuelle Bourgault (Princeton University); Daniela Mitterberger (ETH Zurich)","Abstract":"Large-scale assembly through human-robot collaboration (HRC) is increasingly explored in architecture, engineering, and construction. However, prior research in HRC has primarily examined interaction ..."},{"ID":"257040","Link":"https://programs.sigchi.org/dis/2026/program/content/257040","Title":"“How Do I Want to Live with Type 1 Diabetes?”: Understanding Self-Management Styles to Inform the Design of T1D Technologies","Type":"Paper","Awards":"","Author's Message":"","Swiss Institutes":"University of Zurich; University of Applied Sciences and Arts Northwestern Switzerland","Swiss Authors Count":"5","Swiss Authors":"Clara-Maria Barth (University of Zurich, Zurich); Anton Fedosov (University of Applied Sciences and Arts Northwestern Switzerland, Windisch); Chat Wacharamanotham (University of Zurich, Zurich); Jürgen Bernard (University of Zurich, Zurich); Elaine M. Huang (University of Zurich, Zurich)","All Authors":"Clara-Maria Barth (University of Zurich); Anton Fedosov (University of Applied Sciences and Arts Northwestern Switzerland); Chat Wacharamanotham (University of Zurich); Jürgen Bernard (University of Zurich); Elaine M. Huang (University of Zurich)","Abstract":"Although HCI research indicates that lived experiences should be considered in technologies for type 1 diabetes (T1D) management, technologies and prevailing concepts for “successful” management conti..."},{"ID":"257138","Link":"https://programs.sigchi.org/dis/2026/program/content/257138","Title":"DietCoach: Design, Development and Evaluation of a Dietitian Decision Support System with Patient Loyalty Card Data","Type":"Paper","Awards":"","Author's Message":"","Swiss Institutes":"University of St. Gallen; UDEM; University of Applied Sciences of the Grisons","Swiss Authors Count":"8","Swiss Authors":"Jing Wu (University of St. Gallen, St. Gallen); Philipp John (University of St.Gallen, St.Gallen); Simon Mayer (University of St. Gallen, St. Gallen); Simeon Pilz (University of St.Gallen, St.Gallen); Melanie Stoll (UDEM, Bern); Florian Mathis (University of Applied Sciences of the Grisons, Chur); Freya Orban (UDEM, Bern); Lia Bally (UDEM, Bern)","All Authors":"Jing Wu (University of St. Gallen); Philipp John (University of St.Gallen); Simon Mayer (University of St. Gallen); Simeon Pilz (University of St.Gallen); Melanie Stoll (UDEM); Florian Mathis (University of Applied Sciences of the Grisons); Freya Orban (UDEM); Lia Bally (UDEM)","Abstract":"Dietary counseling (DC) is effective for managing non-communicable diseases but faces scalability challenges due to reliance on self-reporting. While automated nutrition assessment has advanced, how t..."},{"ID":"257146","Link":"https://programs.sigchi.org/dis/2026/program/content/257146","Title":"Building A Civic Tool for Community-Police Engagement to Adapt Neighborhood Policing","Type":"Paper","Awards":"","Author's Message":"","Swiss Institutes":"Idiap Research Institute; Idiap Research Institute and EPFL","Swiss Authors Count":"4","Swiss Authors":"Ravinithesh Annapureddy (Idiap Research Institute, Martigny); William Droz (Idiap Research Institute, Martigny); Alessandro Fornaroli (Idiap Research Institute, Martigny); Daniel Gatica-Perez (Idiap Research Institute and EPFL, Martigny and Lausanne)","All Authors":"Ravinithesh Annapureddy (Idiap Research Institute); Staņislavs Šeiko (Riga Municipal Police); Natalie Higham-James (University of York); William Droz (Idiap Research Institute); Alessandro Fornaroli (Idiap Research Institute); Sarah Vollmer (Camino); Britta Elena Hecking (Camino); Daniel Gatica-Perez (Idiap Research Institute and EPFL)","Abstract":"Data-driven policing often prioritizes incident records over residents’ lived experiences. In the Baltic city of Riga, with historical distrust and limited community-police engagement, this can furthe..."},{"ID":"257165","Link":"https://programs.sigchi.org/dis/2026/program/content/257165","Title":"The Trials of Designing Communication Aids for Clinical Trials: Challenges and Recommendations from Practicing Co-Design in the Domain of Medical Research","Type":"Paper","Awards":"","Author's Message":"","Swiss Institutes":"UDEM; University Hospital of Bern, UDEM","Swiss Authors Count":"3","Swiss Authors":"Bettina Weber (UDEM, Bern); David Studer (University Hospital of Bern, UDEM, Bern); Lia Bally (UDEM, Bern)","All Authors":"Sarah Dunn (University of Edinburgh); Bettina Weber (UDEM); David Studer (University Hospital of Bern, UDEM); Areti Manataki (University of St Andrews); Lia Bally (UDEM); Benjamin Bach (Inria); Tara Capel (University of Edinburgh)","Abstract":"This paper reports on the co-design of data comics for participants in clinical research trials and reflects on the specific challenges encountered when working in this design space. The data comics ..."},{"ID":"257232","Link":"https://programs.sigchi.org/dis/2026/program/content/257232","Title":"Practicing Community-Led Design Justice: Rethinking Participation with At-Risk Communities","Type":"Paper","Awards":"","Author's Message":"","Swiss Institutes":"University of Zurich","Swiss Authors Count":"3","Swiss Authors":"Nimra Ahmed (University of Zürich, Zürich); Mirjam Alexandra Weibel (University of Zurich, Zurich); Elaine M. Huang (University of Zurich, Zurich)","All Authors":"Nimra Ahmed (University of Zürich); Mirjam Alexandra Weibel (University of Zurich); Vishal Sharma (University of Notre Dame); Adrian Petterson (University of Toronto); Jasmine Foriest (Georgia Institute of Technology); Elaine M. Huang (University of Zurich)","Abstract":"Participation is important to Human--Computer Interaction; yet, there are few empirical accounts of how it can be enacted in practice when working with at-risk communities under safety and precarity c..."},{"ID":"257254","Link":"https://programs.sigchi.org/dis/2026/program/content/257254","Title":"From Felt Experience to Robotic Design: Embodied Techniques for Expressive Movement and Shape","Type":"Paper","Awards":"","Author's Message":"","Swiss Institutes":"Zurich Unversity of the Arts","Swiss Authors Count":"1","Swiss Authors":"Diana Serbanescu (Zurich Unversity of the Arts, Zurich)","All Authors":"Chang Shu (University of the Arts London); Joseph Whitmore (University of the Arts London); Zhining Jiang (University of the Arts London); Cheng Chang (University of the Arts London); Diana Serbanescu (Zurich Unversity of the Arts)","Abstract":"While performing arts expertise plays an important role in social robot design, human–robot interaction designers often lack concrete guidance on integrating performance-based techniques into design p..."},{"ID":"257998","Link":"https://programs.sigchi.org/dis/2026/program/content/257998","Title":"SaferRave – Designing for Reflection and Awareness in Digital Harm Reduction","Type":"Competitions","Awards":"","Author's Message":"","Swiss Institutes":"University of Zurich","Swiss Authors Count":"3","Swiss Authors":"Sina Krumhard (University of Zurich, Zurich); Fabio Haussener (University of Zurich, Zurich); Lukas Huber (University of Zurich, Zurich)","All Authors":"Sina Krumhard (University of Zurich); Fabio Haussener (University of Zurich); Lukas Huber (University of Zurich)","Abstract":"Drug checking services in Switzerland struggle to reach individuals when information and support matter most despite big outreach efforts. We therefore aim to offer a low-threshold intervention to pro..."},{"ID":"258004","Link":"https://programs.sigchi.org/dis/2026/program/content/258004","Title":"Yuno: Augmenting Human Memory in Social Contexts Through Real-Time Face Recognition and Contextual Recall","Type":"Demo","Awards":"","Author's Message":"","Swiss Institutes":"University of St. Gallen","Swiss Authors Count":"5","Swiss Authors":"Robin Sutter (University of St. Gallen, St. Gallen); Benjamin Stieger (University of St. Gallen, St. Gallen); Yannik Holenstein (University of St. Gallen, St. Gallen); Yu Sun (University of St. Gallen, St. Gallen); Florian Mathis (University of St. Gallen, St. Gallen)","All Authors":"Robin Sutter (University of St. Gallen); Benjamin Stieger (University of St. Gallen); Yannik Holenstein (University of St. Gallen); Yu Sun (University of St. Gallen); Florian Mathis (University of St. Gallen)","Abstract":"Remembering faces and the contexts in which people were previously encountered is cognitively demanding. In this interactivity paper, we present Yuno, an AI-powered system that augments human social m..."},{"ID":"258016","Link":"https://programs.sigchi.org/dis/2026/program/content/258016","Title":"Pixellated Identity: A Child-Centered Frictional Encounter with GenAI","Type":"Competitions","Awards":"","Author's Message":"","Swiss Institutes":"Università della Svizzera Italiana (USI)","Swiss Authors Count":"3","Swiss Authors":"Irene Zanardi (Università della Svizzera Italiana, Lugano); Shana Dedò (Università della Svizzera italiana (USI), Lugano); Diletta Micol Tobia (Università della Svizzera Italiana, Lugano)","All Authors":"Irene Zanardi (Università della Svizzera Italiana); Shana Dedò (Università della Svizzera italiana (USI)); Diletta Micol Tobia (Università della Svizzera Italiana)","Abstract":"One of the challenges of Generative AI is that, by design, it categorizes identities, reintroducing and amplifying existing societal biases and reducing diversity. With children increasingly interacti..."},{"ID":"258038","Link":"https://programs.sigchi.org/dis/2026/program/content/258038","Title":"Beyond Interaction toward Cooperation and Commoning","Type":"Workshop","Awards":"","Author's Message":"","Swiss Institutes":"University of Applied Sciences and Arts Northwestern Switzerland","Swiss Authors Count":"1","Swiss Authors":"Anton Fedosov (University of Applied Sciences and Arts Northwestern Switzerland, Windisch)","All Authors":"Priyanka Verma (University of Toronto); Aarjav Chauhan (University of Toronto); Jared Katzman (University of Michigan); Hongjin Lin (Harvard University); Dawn Walker (Independent Researcher); Anton Fedosov (University of Applied Sciences and Arts Northwestern Switzerland); Nathan Schneider (University of Colorado Boulder); Maurizio Teli (Aalborg University); Samar Sabie (University of Toronto)","Abstract":"The rich traditions of cooperation and commoning offer many ways to understand our shared relationships to land, ecosystems, and each other, while also providing frameworks for mutual response. This w..."},{"ID":"258040","Link":"https://programs.sigchi.org/dis/2026/program/content/258040","Title":"The Unkillable Deathbot","Type":"PWiP","Awards":"","Author's Message":"","Swiss Institutes":"ZHAW; Institute of Business Information Technology","Swiss Authors Count":"3","Swiss Authors":"Thomas Keller (ZHAW, Winterthur); Mirella Moser (Institute of Business Information Technology, Winterthur); Christian Scherer (Institute of Business Information Technology, Winterthur)","All Authors":"Thomas Keller (ZHAW); Mirella Moser (Institute of Business Information Technology); Christian Scherer (Institute of Business Information Technology)","Abstract":"AI “afterlives” (deathbots, generative ghosts) are typically imagined as platform services: hosted, moderated, and ultimately shut down by someone. This paper provokes a different future: a blockchain..."},{"ID":"258046","Link":"https://programs.sigchi.org/dis/2026/program/content/258046","Title":"Electro-Guo: Edible Electrotactile Displays for Programmable Gastronomy","Type":"PWiP","Awards":"","Author's Message":"","Swiss Institutes":"Interaction Design; Zurich University of the Arts","Swiss Authors Count":"2","Swiss Authors":"Luke Franzke (Interaction Design, Zurich); Lin Hsin-Yi (Zurich University of the Arts, Zurich)","All Authors":"Luke Franzke (Interaction Design); Lin Hsin-Yi (Zurich University of the Arts)","Abstract":"We present Electro-Guo, an edible interface that augments food with programmable tactile sensations. Our system combines electrotactile stimulus hardware with a custom-built eating utensil and edible ..."},{"ID":"258085","Link":"https://programs.sigchi.org/dis/2026/program/content/258085","Title":"MiXR: In-Situ Recomposition of Real-World Objects with Generative AI for Personalized 3D Design","Type":"Demo","Awards":"","Author's Message":"","Swiss Institutes":"Adobe Research","Swiss Authors Count":"1","Swiss Authors":"Mustafa Doga Dogan (Adobe Research, Basel)","All Authors":"Faraz Faruqi (MIT CSAIL); Demircan Tas (MIT CSAIL); Arthur Caetano (University of California, Santa Barbara); Niccolo Meniconi (Arizona State University); Oğuz Arslan (Boğaziçi University); Misha Sra (University of California, Santa Barbara); Ruofei Du (Google XR); Stefanie Mueller (MIT CSAIL); Mustafa Doga Dogan (Adobe Research)","Abstract":"Recent developments in 3D generative AI enable users to create bespoke 3D models from text or image prompts. However, language is often insufficient to express spatial design intent, and customization..."}];
+(function siteApp(conference, papers) {
+  'use strict'
+
+  if (conference.pageTitle) document.title = conference.pageTitle
+
+  var ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ESC[c] })
+  }
+
+  // Swiss author names from the "Swiss Authors" column ("Name (Inst, City); …")
+  function swissNames(swissAuthors) {
+    if (!swissAuthors) return []
+    return swissAuthors.split('; ').map(function (a) {
+      var m = a.match(/^([^(]+)/)
+      return m ? m[1].trim() : ''
+    }).filter(Boolean)
+  }
+
+  // ---------- state ----------
+  var state = { search: '', type: '', institute: '', award: '' }
+  var expanded = {} // paper ID -> true when Author's Message is open
+
+  // Supports #filter:value and #search=x&type=y&institute=z&award=w
+  function parseHashFilters() {
+    var hash = window.location.hash.slice(1)
+    if (!hash) return {}
+    if (hash.indexOf('filter:') === 0) {
+      return { search: decodeURIComponent(hash.slice(7)) }
+    }
+    var params = new URLSearchParams(hash)
+    return {
+      search: params.get('search') || '',
+      type: params.get('type') || '',
+      institute: params.get('institute') || '',
+      award: params.get('award') || '',
+    }
+  }
+
+  function applyHashToState() {
+    var f = parseHashFilters()
+    state.search = f.search || ''
+    state.type = f.type || ''
+    state.institute = f.institute || ''
+    state.award = f.award || ''
+  }
+
+  function syncHash() {
+    var params = new URLSearchParams()
+    if (state.search) params.set('search', state.search)
+    if (state.type) params.set('type', state.type)
+    if (state.institute) params.set('institute', state.institute)
+    if (state.award) params.set('award', state.award)
+    var qs = params.toString()
+    var newHash = qs ? '#' + qs : ''
+    if (window.location.hash !== newHash) {
+      window.history.replaceState(null, '', newHash || window.location.pathname)
+    }
+  }
+
+  function setFilter(key, value) {
+    state[key] = value
+    syncHash()
+    render()
+  }
+
+  // ---------- filtering (same logic as the deployable site) ----------
+  function filteredPapers() {
+    var q = state.search.toLowerCase()
+    return papers.filter(function (p) {
+      var matchesSearch = !state.search ||
+        (p.Title || '').toLowerCase().indexOf(q) !== -1 ||
+        (p['All Authors'] || '').toLowerCase().indexOf(q) !== -1 ||
+        (p.Abstract || '').toLowerCase().indexOf(q) !== -1
+      var matchesType = !state.type || p.Type === state.type
+      var matchesInstitute = !state.institute ||
+        (p['Swiss Institutes'] || '').indexOf(state.institute) !== -1
+      var matchesAward = !state.award ||
+        (p.Awards || '').toLowerCase().indexOf(state.award.toLowerCase()) !== -1
+      return matchesSearch && matchesType && matchesInstitute && matchesAward
+    })
+  }
+
+  // ---------- rendering ----------
+  function chipsHtml() {
+    var active = state.search || state.type || state.institute || state.award
+    if (!active) return ''
+    var h = '<div class="active-filters"><span class="active-filters-label">Active filters:</span>'
+    if (state.search) {
+      h += '<button class="filter-chip" data-clear="search">Search: "' + esc(state.search) +
+        '"<span class="filter-chip-remove">×</span></button>'
+    }
+    if (state.type) {
+      h += '<button class="filter-chip filter-chip-type" data-clear="type">' + esc(state.type) +
+        '<span class="filter-chip-remove">×</span></button>'
+    }
+    if (state.institute) {
+      h += '<button class="filter-chip filter-chip-institute" data-clear="institute">' + esc(state.institute) +
+        '<span class="filter-chip-remove">×</span></button>'
+    }
+    if (state.award) {
+      var ic = state.award.toLowerCase().indexOf('best paper') !== -1 ? '🏆' : '🏅'
+      h += '<button class="filter-chip filter-chip-award" data-clear="award">' + ic + ' ' + esc(state.award) +
+        '<span class="filter-chip-remove">×</span></button>'
+    }
+    h += '<button class="clear-all-filters" data-clear="all">Clear all</button></div>'
+    return h
+  }
+
+  function authorsHtml(p) {
+    var all = p['All Authors'] || ''
+    if (!all) return ''
+    var names = swissNames(p['Swiss Authors'] || '')
+    if (!names.length) return esc(all)
+    var escaped = names.map(function (n) { return n.replace(/[.*+?^$()|[\]\\]/g, '\\$&') })
+    var re = new RegExp('(' + escaped.join('|') + ')', 'g')
+    return all.split(re).map(function (part) {
+      if (names.indexOf(part) !== -1) {
+        return '<button class="swiss-author-link" data-action="author" data-value="' + esc(part) + '">' +
+          esc(part) + '</button>'
+      }
+      return '<span>' + esc(part) + '</span>'
+    }).join('')
+  }
+
+  function cardHtml(p) {
+    var institutes = (p['Swiss Institutes'] || '').split('; ').filter(Boolean)
+    var award = (p.Awards || '').trim()
+    var message = (p["Author's Message"] || '').trim()
+    var id = String(p.ID || '')
+    var h = '<article class="paper-card">'
+    h += '<h3><a href="' + esc(p.Link || '#') + '" target="_blank" rel="noopener noreferrer">' +
+      esc(p.Title) + '</a></h3>'
+    h += '<div class="paper-meta">'
+    h += '<button class="tag tag-type tag-clickable" data-action="type" data-value="' + esc(p.Type) + '">' +
+      esc(p.Type) + '</button>'
+    institutes.forEach(function (inst) {
+      h += '<button class="tag tag-institute tag-clickable" data-action="institute" data-value="' + esc(inst) + '">' +
+        esc(inst) + '</button>'
+    })
+    if (award) {
+      var best = award.toLowerCase().indexOf('best paper') !== -1
+      h += '<button class="tag tag-award tag-clickable ' + (best ? 'tag-award-best' : 'tag-award-honorable') +
+        '" data-action="award" data-value="' + esc(award) + '">' + (best ? '🏆' : '🏅') + ' ' + esc(award) + '</button>'
+    }
+    h += '</div>'
+    h += '<div class="paper-authors">' + authorsHtml(p) + '</div>'
+    if (message) {
+      var open = !!expanded[id]
+      h += '<button class="expand-toggle" data-action="toggle" data-id="' + esc(id) + '">' +
+        (open ? "▲ Hide Author's Message" : "▼ Author's Message") + '</button>'
+      if (open) h += '<div class="paper-expandable"><p>' + esc(message) + '</p></div>'
+    }
+    h += '</article>'
+    return h
+  }
+
+  function render() {
+    var list = filteredPapers()
+    document.getElementById('filters').innerHTML = chipsHtml()
+    document.getElementById('count').textContent = 'Showing ' + list.length + ' contributions'
+    document.getElementById('list').innerHTML = list.map(cardHtml).join('')
+  }
+
+  // ---------- static shell ----------
+  function shellHtml() {
+    var linkedinSvg = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>'
+    return '<div class="app">' +
+      '<header class="header">' +
+      '<h1>' + esc(conference.headerTitle) + '</h1>' +
+      '<p>' + esc(conference.headerSubtitle) + '</p>' +
+      '<div class="header-links">' +
+      '<span>A project by</span>' +
+      '<a href="' + esc(conference.swisschiUrl) + '" target="_blank" rel="noopener noreferrer">SwissCHI</a>' +
+      '<span class="separator">·</span>' +
+      '<a href="' + esc(conference.linkedinUrl) + '" target="_blank" rel="noopener noreferrer" class="linkedin-link">' +
+      linkedinSvg + 'LinkedIn</a>' +
+      '</div></header>' +
+      '<div class="container"><section class="section">' +
+      '<h2>All Contributions</h2>' +
+      '<div id="filters"></div>' +
+      '<div class="papers-count" id="count"></div>' +
+      '<div class="paper-list" id="list"></div>' +
+      '</section></div>' +
+      '<footer class="footer">' + esc(conference.footerCredit) +
+      ' • Vibe-Coded by Claude and <a href="' + esc(conference.footerAuthorUrl) +
+      '" target="_blank" rel="noopener noreferrer">' + esc(conference.footerAuthorName) + '</a> with ❤️' +
+      '</footer></div>'
+  }
+
+  function errorHtml(message) {
+    return '<div class="error-container"><div class="error-card">' +
+      '<h2>Error loading data</h2><p class="error-message">' + esc(message) + '</p>' +
+      '</div></div>'
+  }
+
+  // ---------- boot ----------
+  var root = document.getElementById('app')
+  if (!papers || !papers.length) {
+    root.innerHTML = errorHtml('No data found in this page.')
+    return
+  }
+  root.innerHTML = shellHtml()
+
+  // Event delegation: survives re-renders of chips and list.
+  root.addEventListener('click', function (e) {
+    var btn = e.target.closest('button')
+    if (!btn) return
+    if (btn.hasAttribute('data-clear')) {
+      var which = btn.getAttribute('data-clear')
+      if (which === 'all') {
+        state.search = ''; state.type = ''; state.institute = ''; state.award = ''
+      } else {
+        state[which] = ''
+      }
+      syncHash()
+      render()
+      return
+    }
+    var action = btn.getAttribute('data-action')
+    if (action === 'toggle') {
+      var id = btn.getAttribute('data-id')
+      expanded[id] = !expanded[id]
+      render()
+    } else if (action === 'author') {
+      setFilter('search', btn.getAttribute('data-value'))
+    } else if (action === 'type') {
+      setFilter('type', btn.getAttribute('data-value'))
+    } else if (action === 'institute') {
+      setFilter('institute', btn.getAttribute('data-value'))
+    } else if (action === 'award') {
+      setFilter('award', btn.getAttribute('data-value'))
+    }
+  })
+
+  window.addEventListener('hashchange', function () {
+    applyHashToState()
+    render()
+  })
+
+  applyHashToState()
+  render()
+})(CONFERENCE, PAPERS);
+</script>
+</body>
+</html>
